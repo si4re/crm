@@ -41,7 +41,7 @@ app.post('/upload', upload.single('file'), function(req, res, next) {
 })
 */
 
-var upload = multer({ dest: './uploads/' }).single('file');
+var upload = multer({ dest: './files/upload' }).single('file');
 
 app.post('/upload', function(req, res) {
     upload(req, res, function(err) {
