@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html id="ng-app" ng-app="myApp">
+
+<head>
+    <title>Angular Js</title>
+    <style>
+        table,
+        th,
+        td {
+            border: 1px solid grey;
+            border-collapse: collapse;
+            padding: 5px;
+        }
+        
+        table tr:first-child {
+            background-color: #f1f1f1;
+            font-weight: 900;
+        }
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+    <script src="controllers/myApp.js"></script>
+    <script src="controllers/httpCtrl.js"></script>
+    <script src="/controllers/fileCtrl.js"></script>
+    <script src="/libs/angular-file-upload.min.js"></script>
+</head>
+
+<body ng-app="myApp" ng-controller="httpCtrl">
+    <div>
+        <form class="simple-form" novalidate="">
+            <label>Name: 
+        <input ng-model="textForm.text"
+               type="text" /></label>
+            <br />
+        </form>
+        <button ng-click="postId(textForm.text); getAllData()">Post {{textForm.text}}</button>
+        <button ng-click="deleteAll(); getAllData()">Delete All</button>
+        <table>
+            <td>_id</td>
+            <td>text</td>
+            <td>title</td>
+            <tr ng-repeat="i in getData">
+                <td>{{ i._id }}</td>
+                <td>{{ i.text }}</td>
+                <td>{{ i.title }}</td>
+            </tr>
+        </table>
+        <div>
+            <div ng-controller="fileCtrl">
+                <input nv-file-select="" type="file" uploader="uploader" />
+                <br />
+                <ul>
+                    <li ng-repeat="item in uploader.queue">Name:
+                        <span ng-bind="item.file.name"></span>
+                        <br />
+                        <button ng-click="item.upload()">upload</button></li>
+                </ul>
+            </div>
+        </div>
+        <!--     <h1>{{resFromPostData}}</h1>       -->
+    </div>
+</body>
+
+</html>
